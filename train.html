@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Training — Central Maryland Lax</title>
+  <link rel="icon" href="images/mike.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/cml.css">
+</head>
+<body>
+
+  <div id="page-overlay"></div>
+
+  <!-- NAV -->
+  <nav id="cml-nav">
+    <a href="index.html" class="nav-logo">Central Maryland Lax</a>
+    <ul class="nav-menu" id="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="train.html" class="active">Training</a></li>
+      <li class="nav-dropdown">
+        <button class="nav-dropdown-trigger">
+          Instructors
+          <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg>
+        </button>
+        <div class="nav-dropdown-panel">
+          <a href="jack.html">Jack Simon</a>
+          <a href="davis.html">Davis Whiting</a>
+        </div>
+      </li>
+    </ul>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-ink"></div>
+  </nav>
+
+  <!-- PAGE HEADER — "Training" + curve canvas side by side -->
+  <div class="page-header">
+    <div class="container">
+      <div class="page-header-inner">
+        <div>
+          <p class="page-header-label">Central Maryland Lax</p>
+          <h1>Training</h1>
+          <p class="page-header-sub">Group development sessions built around meaningful reps, direct feedback, and results that translate on game day.</p>
+        </div>
+        <div class="train-header-canvas-wrap">
+          <canvas id="train-curve-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MONTHLY CALENDAR -->
+  <section class="calendar-section" id="calendar">
+    <div class="container">
+      <p class="calendar-section-label reveal">Schedule</p>
+      <h2 class="calendar-section-title reveal d1">Sessions This Month</h2>
+      <p class="calendar-section-sub reveal d2">Click Register on any session to book your spot.</p>
+
+      <div class="reveal">
+        <div class="cal-header">
+          <span class="cal-week-range" id="cal-month-label"></span>
+          <div class="cal-nav-btns">
+            <button class="cal-nav-btn" id="cal-prev">&#8592; Prev</button>
+            <button class="cal-nav-btn" id="cal-next">Next &#8594;</button>
+          </div>
+        </div>
+        <div class="cal-scroll-outer">
+          <div class="cal-day-headers">
+            <div class="cal-day-header-cell">Sun</div>
+            <div class="cal-day-header-cell">Mon</div>
+            <div class="cal-day-header-cell">Tue</div>
+            <div class="cal-day-header-cell">Wed</div>
+            <div class="cal-day-header-cell">Thu</div>
+            <div class="cal-day-header-cell">Fri</div>
+            <div class="cal-day-header-cell">Sat</div>
+          </div>
+          <div class="cal-monthly-grid" id="cal-grid"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="draw-line reveal"></div>
+
+  <!-- THE PROCESS -->
+  <section class="session-breakdown">
+    <div class="container">
+      <p class="breakdown-label reveal">The Process</p>
+      <h2 class="breakdown-title reveal d1">Built With Intent.</h2>
+
+      <div class="process-grid">
+
+        <div class="process-card reveal">
+          <div class="process-card-num">01</div>
+          <h3 class="process-card-title">Warm-Up &amp; Movement Prep</h3>
+          <ul class="process-card-body" style="list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
+            <li>Dynamic stretching, footwork ladder patterns, and neural activation.</li>
+            <li>We prime the body to move at game speed before a single ball touches the ground.</li>
+          </ul>
+        </div>
+
+        <div class="process-card reveal d1">
+          <div class="process-card-num">02</div>
+          <h3 class="process-card-title">Skill Development</h3>
+          <ul class="process-card-body" style="list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
+            <li>Targeted stick work, position-specific mechanics, and isolated technique.</li>
+            <li>Athletes get direct, individualized feedback on exactly what to fix.</li>
+          </ul>
+        </div>
+
+        <div class="process-card reveal d2">
+          <div class="process-card-num">03</div>
+          <h3 class="process-card-title">Live Reps &amp; Competition</h3>
+          <ul class="process-card-body" style="list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
+            <li>Small-sided games, 1v1s, and game-speed situations where decision-making under pressure is the only teacher.</li>
+            <li>High reps, real consequences.</li>
+          </ul>
+        </div>
+
+        <div class="process-card reveal d3">
+          <div class="process-card-num">04</div>
+          <h3 class="process-card-title">Individual Feedback</h3>
+          <ul class="process-card-body" style="list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
+            <li>Every athlete leaves with something specific to work on before the next session.</li>
+            <li>Not generic notes. A precise read of where you are and exactly what comes next.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="cml-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="footer-col-title">Pages</p>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="train.html">Training</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Staff</p>
+          <ul class="footer-links">
+            <li><a href="jack.html">Jack Simon</a></li>
+            <li><a href="davis.html">Davis Whiting</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Contact</p>
+          <ul class="footer-links">
+            <li><a href="mailto:centralmarylandlacrosse@gmail.com">centralmarylandlacrosse@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; Central Maryland Lax. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/cml.js"></script>
+
+  <!-- TRAINING PAGE CURVE — fires immediately on page load -->
+  <script>
+  (function () {
+    const canvas = document.getElementById('train-curve-canvas');
+    const ctx    = canvas.getContext('2d');
+
+    const PAD_L = 68, PAD_R = 36, PAD_T = 26, PAD_B = 42;
+    const DRAW_DUR = 3800, FADE_DUR = 650;
+    const X_TICK_COUNT = 12, Y_TICK_COUNT = 8;
+    const K = 4.2;
+
+    let startTime = null, phase = 'drawing', phaseStart = null;
+    let textAlpha = 0, raf = null, running = false, done = false;
+    let cssW = 0, cssH = 0;
+
+    function resize() {
+      const dpr  = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      cssW = rect.width;
+      cssH = rect.height;
+      canvas.width  = Math.round(cssW * dpr);
+      canvas.height = Math.round(cssH * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function curvePoint(t) {
+      const plotW = cssW - PAD_L - PAD_R;
+      const plotH = cssH - PAD_T - PAD_B;
+      const raw   = (Math.exp(K * t) - 1) / (Math.exp(K) - 1);
+      return { x: PAD_L + t * plotW, y: (cssH - PAD_B) - raw * plotH };
+    }
+
+    function draw(elapsed) {
+      const W = cssW, H = cssH;
+      const plotW = W - PAD_L - PAD_R;
+      const plotH = H - PAD_T - PAD_B;
+      const axisY = H - PAD_B, axisX = PAD_L;
+      const progress = Math.min(elapsed / DRAW_DUR, 1);
+      const tip  = curvePoint(progress);
+      const curveH = plotH > 0 ? (axisY - tip.y) / plotH : 0;
+
+      ctx.clearRect(0, 0, cssW, cssH);
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, cssW, cssH);
+
+      // Axes
+      ctx.strokeStyle = 'rgba(0,0,0,0.15)';
+      ctx.lineWidth   = 0.7;
+      ctx.beginPath(); ctx.moveTo(axisX, axisY); ctx.lineTo(axisX + progress * plotW, axisY); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(axisX, axisY); ctx.lineTo(axisX, axisY - progress * plotH); ctx.stroke();
+
+      // X ticks
+      ctx.strokeStyle = 'rgba(0,0,0,0.4)';
+      ctx.lineWidth   = 0.8;
+      const xTicks = Math.floor(progress * X_TICK_COUNT);
+      for (let i = 0; i < xTicks; i++) {
+        const tx = axisX + ((i + 1) / X_TICK_COUNT) * plotW;
+        ctx.beginPath(); ctx.moveTo(tx, axisY + 3); ctx.lineTo(tx, axisY + 8); ctx.stroke();
+      }
+
+      // Y ticks — reveal only when curve has climbed to that height
+      for (let i = 0; i < Y_TICK_COUNT; i++) {
+        const f = (i + 1) / Y_TICK_COUNT;
+        if (curveH >= f) {
+          const ty = axisY - f * plotH;
+          ctx.beginPath(); ctx.moveTo(axisX - 3, ty); ctx.lineTo(axisX - 8, ty); ctx.stroke();
+        }
+      }
+
+      // Axis labels — fade in over last 15% of draw
+      const lA = Math.max(0, Math.min(1, (progress - 0.85) / 0.15));
+      if (lA > 0) {
+        ctx.fillStyle     = `rgba(0,0,0,${(lA * 0.38).toFixed(3)})`;
+        ctx.font          = '8px monospace';
+        ctx.letterSpacing = '0.1em';
+        ctx.textAlign     = 'left';
+        ctx.textBaseline  = 'top';
+        ctx.fillText('HOURS', axisX + plotW + 5, axisY - 4);
+        ctx.save();
+        ctx.translate(axisX - 32, PAD_T + plotH / 2);
+        ctx.rotate(-Math.PI / 2);
+        ctx.textAlign    = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('BREAKTHROUGH', 0, 0);
+        ctx.restore();
+        ctx.letterSpacing = '0';
+      }
+
+      // Curve
+      ctx.strokeStyle = 'rgba(0,0,0,0.9)';
+      ctx.lineWidth   = 3;
+      ctx.lineJoin    = 'round';
+      ctx.beginPath();
+      let seg = false;
+      for (let i = 0; i <= 280; i++) {
+        const p = curvePoint((i / 280) * progress);
+        if (!seg) { ctx.moveTo(p.x, p.y); seg = true; } else { ctx.lineTo(p.x, p.y); }
+      }
+      ctx.stroke();
+
+      // "THE WORK COMPOUNDS."
+      if (textAlpha > 0) {
+        ctx.fillStyle     = `rgba(0,0,0,${textAlpha.toFixed(3)})`;
+        ctx.font          = '7px monospace';
+        ctx.letterSpacing = '0.14em';
+        ctx.textAlign     = 'center';
+        ctx.textBaseline  = 'alphabetic';
+        ctx.fillText('THE WORK COMPOUNDS.', W / 2, axisY + 28);
+        ctx.letterSpacing = '0';
+      }
+    }
+
+    function tick(now) {
+      if (!startTime) startTime = now;
+      const elapsed = now - startTime;
+      if (phase === 'drawing') {
+        draw(elapsed);
+        if (elapsed >= DRAW_DUR) { phase = 'fading'; phaseStart = now; }
+      } else if (phase === 'fading') {
+        const fe = now - phaseStart;
+        textAlpha = Math.min(fe / FADE_DUR, 1);
+        draw(DRAW_DUR);
+        if (fe >= FADE_DUR) {
+          textAlpha = 1; draw(DRAW_DUR);
+          done = running = false; return;
+        }
+      }
+      if (running) raf = requestAnimationFrame(tick);
+    }
+
+    function start() {
+      if (running || done) return;
+      running = true;
+      raf = requestAnimationFrame(tick);
+    }
+
+    // Start immediately when page loads — no scroll trigger needed
+    window.addEventListener('load', () => { resize(); start(); });
+    window.addEventListener('resize', resize);
+  })();
+  </script>
+
+  <!-- MONTHLY CALENDAR -->
+  <script>
+  (function () {
+    const MONTHS_LONG = ['January','February','March','April','May','June',
+                         'July','August','September','October','November','December'];
+
+    // Specific session dates: { year, month (0-indexed), date, name, time }
+    const SESSIONS = [
+      { year: 2026, month: 3, date: 25, name: 'Clinic', time: 'TBD' },
+      { year: 2026, month: 3, date: 26, name: 'Clinic', time: 'TBD' },
+      { year: 2026, month: 4, date:  9, name: 'Clinic', time: 'TBD' },
+      { year: 2026, month: 4, date: 10, name: 'Clinic', time: 'TBD' },
+    ];
+
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    let viewYear  = today.getFullYear();
+    let viewMonth = today.getMonth();
+    const MIN_Y = today.getFullYear(), MIN_M = today.getMonth();
+    const MAX_AHEAD = 3;  // months forward
+
+    function buildCalendar() {
+      document.getElementById('cal-month-label').textContent =
+        `${MONTHS_LONG[viewMonth]} ${viewYear}`;
+
+      const atMin = viewYear === MIN_Y && viewMonth <= MIN_M;
+      const monthsAhead = (viewYear - MIN_Y) * 12 + (viewMonth - MIN_M);
+      const atMax = monthsAhead >= MAX_AHEAD;
+      document.getElementById('cal-prev').disabled = atMin;
+      document.getElementById('cal-next').disabled = atMax;
+
+      const grid = document.getElementById('cal-grid');
+      grid.innerHTML = '';
+
+      const firstDow = new Date(viewYear, viewMonth, 1).getDay();
+      const daysInMo = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+      // Empty leading cells
+      for (let i = 0; i < firstDow; i++) {
+        const el = document.createElement('div');
+        el.className = 'cal-day-cell cal-day-empty';
+        grid.appendChild(el);
+      }
+
+      // Day cells
+      for (let d = 1; d <= daysInMo; d++) {
+        const date     = new Date(viewYear, viewMonth, d);
+        const dow      = date.getDay();
+        const isToday  = date.getTime() === today.getTime();
+        const sessions = SESSIONS.filter(s => s.year === viewYear && s.month === viewMonth && s.date === d);
+
+        const cell = document.createElement('div');
+        cell.className = 'cal-day-cell'
+          + (isToday        ? ' is-today'     : '')
+          + (sessions.length ? ' has-sessions' : '');
+
+        const pills = sessions.map(s =>
+          `<div class="cal-session-pill">
+            <span class="cal-session-name">${s.name}</span>
+            <span class="cal-session-time">${s.time}</span>
+          </div>`
+        ).join('');
+
+        const dateStr = `${viewYear}-${String(viewMonth + 1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        const regBtn = sessions.length
+          ? `<a href="book.html?date=${dateStr}" class="cal-register-btn">Register &rarr;</a>` : '';
+
+        cell.innerHTML = `<div class="cal-day-num">${d}</div>${pills}${regBtn}`;
+        grid.appendChild(cell);
+      }
+    }
+
+    document.getElementById('cal-prev').addEventListener('click', () => {
+      viewMonth--;
+      if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+      buildCalendar();
+    });
+    document.getElementById('cal-next').addEventListener('click', () => {
+      viewMonth++;
+      if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+      buildCalendar();
+    });
+
+    buildCalendar();
+  })();
+  </script>
+
+
+</body>
+</html>

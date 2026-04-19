@@ -31,6 +31,7 @@
           <a href="davis.html">Davis Whiting</a>
         </div>
       </li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -43,7 +44,7 @@
     <div class="container">
       <p class="page-header-label">Sessions</p>
       <h1>Book Your Spot</h1>
-      <p class="page-header-sub">Select a session below and reserve your place. Payment of $60 via Zelle to <strong style="color:var(--white);font-weight:600;">info@centralmdlax.com</strong> confirms your registration.</p>
+      <p class="page-header-sub">Select a session below and reserve your place. Payment of $60 via Zelle to <strong style="color:var(--white);font-weight:600;">drivenedgellc@gmail.com</strong> confirms your registration.</p>
     </div>
   </div>
 
@@ -56,10 +57,20 @@
   <script>
     (function () {
       const params = new URLSearchParams(window.location.search);
-      const date = params.get('date');
-      const calendlyURL = 'https://calendly.com/centralmdlax-info/cml-training-session' + (date ? '?date=' + date : '');
-      document.getElementById('calendly-container').innerHTML =
-        '<div class="calendly-inline-widget" data-url="' + calendlyURL + '" style="min-width:320px;height:700px;"></div>';
+      const rawDate = params.get('date');
+      // Strict allow-list: YYYY-MM-DD only. Any other input is dropped.
+      const dateOk = rawDate && /^\d{4}-\d{2}-\d{2}$/.test(rawDate);
+      const baseURL = 'https://calendly.com/centralmdlax-info/cml-training-session';
+      const calendlyURL = dateOk ? baseURL + '?date=' + rawDate : baseURL;
+
+      const widget = document.createElement('div');
+      widget.className = 'calendly-inline-widget';
+      widget.setAttribute('data-url', calendlyURL);
+      widget.style.minWidth = '320px';
+      widget.style.height = '700px';
+
+      const container = document.getElementById('calendly-container');
+      container.replaceChildren(widget);
     })();
   </script>
 
@@ -72,6 +83,7 @@
           <ul class="footer-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="train.html">Training</a></li>
+            <li><a href="contact.html">Contact</a></li>
           </ul>
         </div>
         <div>
@@ -84,7 +96,7 @@
         <div>
           <p class="footer-col-title">Contact</p>
           <ul class="footer-links">
-            <li><a href="mailto:centralmarylandlacrosse@gmail.com">centralmarylandlacrosse@gmail.com</a></li>
+            <li><a href="mailto:info@centralmdlax.com">info@centralmdlax.com</a></li>
           </ul>
         </div>
       </div>

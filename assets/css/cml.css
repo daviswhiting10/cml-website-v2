@@ -1714,13 +1714,13 @@ ul { list-style: none; }
   background: rgba(0,0,0,0.04);
   border: 1px solid var(--border);
   border-left: 2px solid var(--navy-lt);
-  padding: 0.2rem 0.35rem;
+  padding: 0.3rem 0.4rem;
   margin-bottom: 0.18rem;
 }
 .cal-session-name {
   display: block;
   font-family: var(--fh);
-  font-size: 0.62rem;
+  font-size: 0.56rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -1728,24 +1728,37 @@ ul { list-style: none; }
   line-height: 1.2;
 }
 .cal-session-time {
-  display: block;
-  font-size: 0.58rem;
-  color: var(--muted);
-  margin-top: 0.08rem;
+  display: none;
 }
 .cal-session-location {
   display: block;
-  font-size: 0.55rem;
+  font-size: 0.48rem;
   color: var(--muted);
-  margin-top: 0.12rem;
+  margin-top: 0.15rem;
   font-style: italic;
+  letter-spacing: 0.02em;
 }
-.cal-session-detail {
-  display: block;
-  font-size: 0.52rem;
+.cal-session-details-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.2rem 0 0 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 0.18rem;
+}
+.cal-session-details-list li {
+  position: relative;
+  padding-left: 0.55rem;
+  font-size: 0.46rem;
   color: var(--muted);
-  margin-top: 0.06rem;
-  line-height: 1.3;
+  line-height: 1.45;
+  margin-bottom: 0.1rem;
+}
+.cal-session-details-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--navy-lt);
+  font-size: 0.5rem;
 }
 .cal-register-btn {
   display: block;

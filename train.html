@@ -363,13 +363,13 @@
           + (sessions.length ? ' has-sessions' : '');
 
         const pills = sessions.map(s => {
-          const detailLines = (s.details || []).map(d => `<span class="cal-session-detail">${d}</span>`).join('');
+          const detailItems = (s.details || []).map(d => `<li>${d}</li>`).join('');
+          const detailList = detailItems ? `<ul class="cal-session-details-list">${detailItems}</ul>` : '';
           const loc = s.location ? `<span class="cal-session-location">${s.location}</span>` : '';
           return `<div class="cal-session-pill">
             <span class="cal-session-name">${s.name}</span>
-            <span class="cal-session-time">${s.time}</span>
             ${loc}
-            ${detailLines}
+            ${detailList}
           </div>`;
         }).join('');
 

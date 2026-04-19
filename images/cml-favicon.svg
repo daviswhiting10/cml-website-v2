@@ -1,15 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Stick head (rounded teardrop/scoop shape) -->
-  <path d="M24 42V20c0-10 3.6-16 8-16s8 6 8 16v22" fill="#1a2744" stroke="#1a2744" stroke-width="3" stroke-linejoin="round"/>
-  <!-- Head top fill -->
-  <ellipse cx="32" cy="18" rx="11" ry="14" fill="#1a2744"/>
-  <!-- Mesh lines -->
-  <line x1="24" y1="12" x2="40" y2="12" stroke="#fff" stroke-width="1" opacity="0.55"/>
-  <line x1="23" y1="20" x2="41" y2="20" stroke="#fff" stroke-width="1" opacity="0.55"/>
-  <line x1="23" y1="28" x2="41" y2="28" stroke="#fff" stroke-width="1" opacity="0.55"/>
-  <line x1="29" y1="5" x2="27" y2="32" stroke="#fff" stroke-width="1" opacity="0.55"/>
-  <line x1="32" y1="4" x2="32" y2="32" stroke="#fff" stroke-width="1" opacity="0.55"/>
-  <line x1="35" y1="5" x2="37" y2="32" stroke="#fff" stroke-width="1" opacity="0.55"/>
-  <!-- Handle -->
-  <rect x="29" y="34" width="6" height="26" rx="3" fill="#1a2744"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 560" width="700" height="560" role="img" aria-label="Central Maryland Lacrosse">
+  <defs>
+    <style>
+      .ink { fill: #000000; }
+      .stroke-ink { stroke: #000000; fill: none; }
+      .serif-heavy { font-family: 'Times New Roman', Georgia, serif; font-weight: 900; }
+    </style>
+  </defs>
+
+  <rect fill="#ffffff" x="0" y="0" width="700" height="560"/>
+
+  <!-- Shorter shield with a shallower V-point at the bottom -->
+  <path class="stroke-ink" stroke-width="7" stroke-linejoin="miter" d="
+    M 80,120 L 620,120 L 620,400 L 350,500 L 80,400 Z"/>
+
+  <path class="ink" d="M 80,120 L 620,120 L 620,195 L 80,195 Z"/>
+
+  <text x="350" y="168" text-anchor="middle" class="serif-heavy" fill="#ffffff" font-size="26" letter-spacing="4">CENTRAL MARYLAND LACROSSE</text>
+
+  <!-- CML centered in the tighter body -->
+  <text x="350" y="310" text-anchor="middle" dominant-baseline="middle"
+        class="serif-heavy ink" font-size="220" letter-spacing="0">CML</text>
 </svg>

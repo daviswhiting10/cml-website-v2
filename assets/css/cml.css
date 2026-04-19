@@ -2052,3 +2052,17 @@ ul { list-style: none; }
   .hero-content { padding: 1.25rem; }
   .nav-hamburger { padding: 10px; min-height: 44px; min-width: 44px; }
 }
+
+/* --- Accessible focus ring --- */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+/* Dark-on-light surfaces (page-header / contact-page-header) invert */
+.page-header :focus-visible,
+.profile-page-header :focus-visible,
+.contact-page-header :focus-visible {
+  outline-color: var(--black);
+}

@@ -66,13 +66,13 @@
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="train.html">Training</a></li>
       <li class="nav-dropdown">
-        <button class="nav-dropdown-trigger">
+        <button class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="menu" aria-controls="nav-dropdown-panel-instructors">
           Instructors
           <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M1 1l4 4 4-4"/>
           </svg>
         </button>
-        <div class="nav-dropdown-panel">
+        <div class="nav-dropdown-panel" id="nav-dropdown-panel-instructors" role="menu">
           <a href="jack.html">Jack Simon</a>
           <a href="davis.html">Davis Whiting</a>
         </div>

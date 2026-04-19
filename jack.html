@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://calendly.com https://*.calendly.com https://www.youtube.com; connect-src 'self' https://calendly.com https://*.calendly.com; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'self'">
   <title>Jack Simon, Head Instructor — Central Maryland Lax</title>
   <link rel="icon" type="image/png" href="images/cml-favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#0a0a0a">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -65,7 +69,7 @@
 
     <div class="profile-top">
       <div class="profile-image-col reveal-l">
-        <img src="images/jlax.jpg" alt="Jack Simon — lacrosse">
+        <img src="images/jlax.jpg" alt="Jack Simon — lacrosse" decoding="async" fetchpriority="high">
       </div>
       <div class="profile-info-col reveal-r">
         <p class="profile-role-label">Head Instructor</p>
@@ -111,15 +115,15 @@
 
       <div class="skills-row">
         <div class="skill-cell reveal">
-          <h4 class="skill-cell-title">Biomechanics</h4>
+          <h3 class="skill-cell-title">Biomechanics</h3>
           <p class="skill-cell-body">Coaching movement rooted in how the body actually works, building efficiency that transfers directly to the field and holds up under game-speed pressure.</p>
         </div>
         <div class="skill-cell reveal d1">
-          <h4 class="skill-cell-title">Exercise Physiology</h4>
+          <h3 class="skill-cell-title">Exercise Physiology</h3>
           <p class="skill-cell-body">Training grounded in the science of human performance. Every drill has a purpose backed by evidence. No junk reps.</p>
         </div>
         <div class="skill-cell reveal d2">
-          <h4 class="skill-cell-title">Strength &amp; Conditioning</h4>
+          <h3 class="skill-cell-title">Strength &amp; Conditioning</h3>
           <p class="skill-cell-body">Physical preparation built for the specific demands of lacrosse: speed, power, endurance, and the durability to stay on the field.</p>
         </div>
       </div>
@@ -137,7 +141,7 @@
 
       <div class="feature-row reveal">
         <div class="feature-row-img">
-          <img src="images/chop.jpeg" alt="Physical Readiness">
+          <img src="images/chop.jpeg" alt="Physical Readiness" loading="lazy" decoding="async">
         </div>
         <div class="feature-row-text">
           <p class="feature-row-eyebrow">Athleticism</p>
@@ -163,7 +167,7 @@
           </ul>
         </div>
         <div class="feature-row-img">
-          <img src="images/CMLjackHeadshot.jpg" alt="Jack Simon">
+          <img src="images/CMLjackHeadshot.jpg" alt="Jack Simon" loading="lazy" decoding="async">
         </div>
       </div>
 

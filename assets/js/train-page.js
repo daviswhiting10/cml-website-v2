@@ -143,11 +143,8 @@
   const MONTHS_LONG = ['January','February','March','April','May','June',
                        'July','August','September','October','November','December'];
 
-  // Specific session dates: { year, month (0-indexed), date, name, time }
-  const SESSIONS = [
-    { year: 2026, month: 4, date: 23, name: '2035–2026 Skill Development Clinic', time: '9:30 AM – 12:00 PM', location: 'Western Regional Park', details: ['9:30 – 10:45 AM: Grad Years 2036–2033', '10:45 AM – 12:00 PM: Grad Years 2032–2026'] },
-    { year: 2026, month: 5, date:  6, name: '2035–2026 Skill Development Clinic', time: '9:30 AM – 12:00 PM', location: 'Western Regional Park', details: ['9:30 – 10:45 AM: Grad Years 2036–2033', '10:45 AM – 12:00 PM: Grad Years 2032–2026'] },
-  ];
+  // Specific session dates — shared source of truth from clinic-dates.js
+  const SESSIONS = window.CML_SESSIONS || [];
 
   const today = new Date(); today.setHours(0, 0, 0, 0);
   let viewYear  = today.getFullYear();

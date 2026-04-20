@@ -25,7 +25,7 @@ body {
   --g1:         #f5f5f5;
   --g2:         #ebebeb;
   --g3:         #e0e0e0;
-  --muted:      #888888;
+  --muted:      #6b6b6b;
   --border:     rgba(0,0,0,0.1);
   --navy:       #0d1f3c;
   --navy-lt:    #1a3560;
@@ -2051,4 +2051,18 @@ ul { list-style: none; }
   .hero-headline { font-size: clamp(2.2rem, 14vw, 3.5rem); }
   .hero-content { padding: 1.25rem; }
   .nav-hamburger { padding: 10px; min-height: 44px; min-width: 44px; }
+}
+
+/* --- Accessible focus ring --- */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+/* Dark-on-light surfaces (page-header / contact-page-header) invert */
+.page-header :focus-visible,
+.profile-page-header :focus-visible,
+.contact-page-header :focus-visible {
+  outline-color: var(--black);
 }

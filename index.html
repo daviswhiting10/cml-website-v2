@@ -3,12 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Central Maryland Lax</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://calendly.com https://*.calendly.com https://www.youtube.com; connect-src 'self' https://calendly.com https://*.calendly.com; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'self'">
+  <title>Central Maryland Lax — D1 Lacrosse Training in Columbia, MD</title>
   <link rel="icon" type="image/png" href="images/cml-favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#0a0a0a">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/cml.css">
+
+  <!-- SEO -->
+  <meta name="description" content="D1-driven lacrosse training in Columbia, MD. Private sessions, recruiting guidance, and skill development for serious athletes.">
+  <link rel="canonical" href="https://centralmdlax.com/">
+  <meta name="robots" content="index,follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Central Maryland Lax">
+  <meta property="og:title" content="Central Maryland Lax — D1 Lacrosse Training in Columbia, MD">
+  <meta property="og:description" content="D1-driven lacrosse training in Columbia, MD. Private sessions, recruiting guidance, and skill development for serious athletes.">
+  <meta property="og:image" content="https://centralmdlax.com/images/og-default.jpg">
+  <meta property="og:url" content="https://centralmdlax.com/">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Central Maryland Lax — D1 Lacrosse Training in Columbia, MD">
+  <meta name="twitter:description" content="D1-driven lacrosse training in Columbia, MD. Private sessions, recruiting guidance, and skill development for serious athletes.">
+  <meta name="twitter:image" content="https://centralmdlax.com/images/og-default.jpg">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsActivityLocation",
+    "name": "Central Maryland Lax",
+    "description": "D1-driven lacrosse training for serious athletes in the Columbia, Silver Spring, and Frederick communities.",
+    "url": "https://centralmdlax.com/",
+    "email": "info@centralmdlax.com",
+    "image": "https://centralmdlax.com/images/og-default.jpg",
+    "sport": "Lacrosse",
+    "founder": [
+      { "@type": "Person", "name": "Jack Simon" },
+      { "@type": "Person", "name": "Davis Whiting" }
+    ]
+  }
+  </script>
 </head>
 <body class="is-homepage">
 
@@ -25,17 +66,18 @@
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="train.html">Training</a></li>
       <li class="nav-dropdown">
-        <button class="nav-dropdown-trigger">
+        <button class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="menu" aria-controls="nav-dropdown-panel-instructors">
           Instructors
           <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M1 1l4 4 4-4"/>
           </svg>
         </button>
-        <div class="nav-dropdown-panel">
+        <div class="nav-dropdown-panel" id="nav-dropdown-panel-instructors" role="menu">
           <a href="jack.html">Jack Simon</a>
           <a href="davis.html">Davis Whiting</a>
         </div>
       </li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
 
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
@@ -90,7 +132,7 @@
         </div>
 
         <div class="about-image-wrap reveal-r">
-          <img src="images/team.jpeg" alt="Central Maryland Lax team training">
+          <img src="images/team.jpeg" alt="Central Maryland Lax team training" loading="lazy" decoding="async">
           <div class="about-image-overlay"></div>
         </div>
 
@@ -221,6 +263,9 @@
           <ul class="footer-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="train.html">Training</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="privacy.html">Privacy</a></li>
+            <li><a href="waiver.html">Waiver</a></li>
           </ul>
         </div>
         <div>
@@ -244,210 +289,5 @@
   </footer>
 
   <script src="assets/js/cml.js"></script>
-
-  <script>
-  (function () {
-    const canvas = document.getElementById('compound-canvas');
-    if (!canvas) return;
-    const ctx    = canvas.getContext('2d');
-
-    // ── Layout constants ──────────────────────────────────────────
-    const PAD_L  = 100;  // left margin (Y axis + label)
-    const PAD_R  = 80;   // right margin
-    const PAD_T  = 56;   // top margin
-    const PAD_B  = 72;   // bottom margin (X axis ticks + labels)
-
-    // ── Timing (ms) ───────────────────────────────────────────────
-    const DRAW_DUR     = 8000; // time to draw the full curve
-    const FADE_DUR     = 900;  // text fade-in after curve completes
-    const X_TICK_COUNT = 20;   // session ticks on X axis
-    const Y_TICK_COUNT = 12;   // milestone ticks on Y axis
-
-    // ── State ─────────────────────────────────────────────────────
-    let startTime  = null;
-    let phase      = 'drawing';  // 'drawing' | 'fading' | 'done'
-    let phaseStart = null;
-    let textAlpha  = 0;
-    let raf        = null;
-    let running    = false;
-    let started    = false;      // has the animation ever run?
-    let cssW       = 0;
-    let cssH       = 0;
-
-    function resize() {
-      const dpr  = window.devicePixelRatio || 1;
-      const rect = canvas.getBoundingClientRect();
-      cssW = rect.width;
-      cssH = rect.height;
-      canvas.width  = Math.round(cssW * dpr);
-      canvas.height = Math.round(cssH * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-
-    // ── Curve math ────────────────────────────────────────────────
-    const K = 4.2;
-
-    function curvePoint(t) {
-      const plotW = cssW - PAD_L - PAD_R;
-      const plotH = cssH - PAD_T - PAD_B;
-      const raw   = (Math.exp(K * t) - 1) / (Math.exp(K) - 1);
-      return {
-        x: PAD_L + t * plotW,
-        y: (cssH - PAD_B) - raw * plotH
-      };
-    }
-
-    // ── Draw ──────────────────────────────────────────────────────
-    function draw(elapsed) {
-      const W      = cssW;
-      const H      = cssH;
-      const plotW  = W - PAD_L - PAD_R;
-      const plotH  = H - PAD_T - PAD_B;
-      const axisY  = H - PAD_B;
-      const axisX  = PAD_L;
-      const progress = Math.min(elapsed / DRAW_DUR, 1);
-
-      ctx.clearRect(0, 0, cssW, cssH);
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, cssW, cssH);
-
-      // Current tip of the curve (for Y-tick sync)
-      const tip = curvePoint(progress);
-      // How far up the plot the tip currently is (0 = bottom, 1 = top)
-      const curveHeightFraction = (axisY - tip.y) / plotH;
-
-      // ── Axes — draw in progressively ─────────────────────────
-      ctx.strokeStyle = 'rgba(0,0,0,0.15)';
-      ctx.lineWidth   = 0.8;
-      // X axis (left → right with progress)
-      ctx.beginPath();
-      ctx.moveTo(axisX, axisY);
-      ctx.lineTo(axisX + progress * plotW, axisY);
-      ctx.stroke();
-      // Y axis (bottom → top with progress)
-      ctx.beginPath();
-      ctx.moveTo(axisX, axisY);
-      ctx.lineTo(axisX, axisY - progress * plotH);
-      ctx.stroke();
-
-      // ── X axis ticks (sessions accumulating) ─────────────────
-      ctx.strokeStyle = 'rgba(0,0,0,0.5)';
-      ctx.lineWidth   = 1;
-      const xTicks = Math.floor(progress * X_TICK_COUNT);
-      for (let i = 0; i < xTicks; i++) {
-        const t  = (i + 1) / X_TICK_COUNT;
-        const tx = axisX + t * plotW;
-        ctx.beginPath();
-        ctx.moveTo(tx, axisY + 4);
-        ctx.lineTo(tx, axisY + 11);
-        ctx.stroke();
-      }
-
-      // ── Y axis ticks — reveal when curve passes through their height ──
-      for (let i = 0; i < Y_TICK_COUNT; i++) {
-        const tickFraction = (i + 1) / Y_TICK_COUNT;  // 0→1 bottom to top
-        if (curveHeightFraction >= tickFraction) {
-          const ty = axisY - tickFraction * plotH;
-          ctx.beginPath();
-          ctx.moveTo(axisX - 4, ty);
-          ctx.lineTo(axisX - 11, ty);
-          ctx.stroke();
-        }
-      }
-
-      // ── Axis labels (fade in during final 15% of draw) ────────
-      const labelAlpha = Math.max(0, Math.min(1, (progress - 0.85) / 0.15));
-      if (labelAlpha > 0) {
-        ctx.fillStyle     = `rgba(0,0,0,${(labelAlpha * 0.45).toFixed(3)})`;
-        ctx.font          = '10px monospace';
-        ctx.letterSpacing = '0.14em';
-
-        // "HOURS" — right end of X axis
-        ctx.textAlign    = 'left';
-        ctx.textBaseline = 'top';
-        ctx.fillText('HOURS', axisX + plotW + 8, axisY - 5);
-
-        // "BREAKTHROUGH" — centred along Y axis, 34px left of axis
-        ctx.save();
-        const midY = PAD_T + plotH / 2;
-        ctx.translate(axisX - 34, midY);
-        ctx.rotate(-Math.PI / 2);
-        ctx.textAlign    = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('BREAKTHROUGH', 0, 0);
-        ctx.restore();
-
-        ctx.letterSpacing = '0';
-      }
-
-      // ── Exponential curve ─────────────────────────────────────
-      ctx.strokeStyle = 'rgba(0,0,0,0.88)';
-      ctx.lineWidth   = 2.5;
-      ctx.lineJoin    = 'round';
-      ctx.beginPath();
-      const steps = 400;
-      let segStarted = false;
-      for (let i = 0; i <= steps; i++) {
-        const t = (i / steps) * progress;
-        const p = curvePoint(t);
-        if (!segStarted) { ctx.moveTo(p.x, p.y); segStarted = true; }
-        else             { ctx.lineTo(p.x, p.y); }
-      }
-      ctx.stroke();
-
-      // ── "THE WORK COMPOUNDS." ─────────────────────────────────
-      if (textAlpha > 0) {
-        ctx.fillStyle     = `rgba(0,0,0,${textAlpha.toFixed(3)})`;
-        ctx.font          = '11px monospace';
-        ctx.letterSpacing = '0.18em';
-        ctx.textAlign     = 'center';
-        ctx.textBaseline  = 'alphabetic';
-        ctx.fillText('THE WORK COMPOUNDS.', W / 2, axisY + 46);
-        ctx.letterSpacing = '0';
-      }
-    }
-
-    // ── Animation loop — no loop, holds on completion ─────────────
-    function tick(now) {
-      if (!startTime) startTime = now;
-      const elapsed = now - startTime;
-
-      if (phase === 'drawing') {
-        draw(elapsed);
-        if (elapsed >= DRAW_DUR) { phase = 'fading'; phaseStart = now; }
-      } else if (phase === 'fading') {
-        const fe = now - phaseStart;
-        textAlpha = Math.min(fe / FADE_DUR, 1);
-        draw(DRAW_DUR);
-        if (fe >= FADE_DUR) {
-          textAlpha = 1;
-          draw(DRAW_DUR);  // final settled frame
-          phase = 'done';
-          running = false;
-          return;          // stop the loop — hold forever
-        }
-      }
-
-      if (running) raf = requestAnimationFrame(tick);
-    }
-
-    function start() {
-      if (running || started) return;  // never restart
-      started = running = true;
-      startTime = null; phaseStart = null;
-      phase = 'drawing'; textAlpha = 0;
-      raf = requestAnimationFrame(tick);
-    }
-
-    // ── Intersection Observer — start once when first visible ─────
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) start(); });
-    }, { threshold: 0.1 });
-
-    window.addEventListener('resize', resize);
-    resize();
-    observer.observe(canvas);
-  })();
-  </script>
 </body>
 </html>

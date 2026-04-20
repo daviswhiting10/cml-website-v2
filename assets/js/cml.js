@@ -92,9 +92,28 @@
     if (dropdownTrigger && dropdownPanel) {
       dropdownTrigger.addEventListener('click', function () {
         if (window.innerWidth <= 960) {
-          dropdownPanel.classList.toggle('mobile-open');
+          const isOpen = dropdownPanel.classList.toggle('mobile-open');
+          dropdownTrigger.setAttribute('aria-expanded', String(isOpen));
         }
       });
+      // Desktop hover opens/closes via CSS; mirror the state into aria-expanded.
+      const dropdownLi = dropdownTrigger.closest('.nav-dropdown');
+      if (dropdownLi) {
+        dropdownLi.addEventListener('mouseenter', function () {
+          if (window.innerWidth > 960) dropdownTrigger.setAttribute('aria-expanded', 'true');
+        });
+        dropdownLi.addEventListener('mouseleave', function () {
+          if (window.innerWidth > 960) dropdownTrigger.setAttribute('aria-expanded', 'false');
+        });
+        dropdownLi.addEventListener('focusin', function () {
+          dropdownTrigger.setAttribute('aria-expanded', 'true');
+        });
+        dropdownLi.addEventListener('focusout', function (e) {
+          if (!dropdownLi.contains(e.relatedTarget)) {
+            dropdownTrigger.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
     }
 
     // Close on any nav link click
@@ -103,6 +122,7 @@
         hamburger.classList.remove('open');
         navMenu.classList.remove('open');
         if (dropdownPanel) dropdownPanel.classList.remove('mobile-open');
+        if (dropdownTrigger) dropdownTrigger.setAttribute('aria-expanded', 'false');
       });
     });
   }

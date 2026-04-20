@@ -1,4 +1,4 @@
-window.initCalendly = function () {
+(function () {
   const params = new URLSearchParams(window.location.search);
   const rawDate = params.get('date');
   // Strict allow-list: YYYY-MM-DD only. Any other input is dropped.
@@ -14,8 +14,4 @@ window.initCalendly = function () {
 
   const container = document.getElementById('calendly-container');
   container.replaceChildren(widget);
-
-  if (window.Calendly) {
-    window.Calendly.initInlineWidgets();
-  }
-};
+})();

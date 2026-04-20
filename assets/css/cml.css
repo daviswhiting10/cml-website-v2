@@ -147,20 +147,20 @@ ul { list-style: none; }
 .nav-dropdown-panel {
   position: absolute;
   top: calc(100% + 1.2rem);
-  left: 50%;
+  left: 0;
   background: var(--g1);
   border: 1px solid var(--border);
   min-width: 170px;
   opacity: 0;
   pointer-events: none;
-  transform: translateX(-50%) translateY(-6px);
+  transform: translateY(-6px);
   transition: opacity 0.2s, transform 0.2s;
 }
 .nav-dropdown:hover .nav-dropdown-panel,
 .nav-dropdown:focus-within .nav-dropdown-panel {
   opacity: 1;
   pointer-events: all;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
 }
 .nav-dropdown-panel a {
   display: block;
@@ -180,6 +180,8 @@ ul { list-style: none; }
   background: none;
   border: none;
   padding: 4px;
+  position: relative;
+  z-index: 1000;
 }
 .nav-hamburger span {
   display: block;

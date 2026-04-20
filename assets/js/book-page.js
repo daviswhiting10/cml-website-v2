@@ -14,4 +14,13 @@
 
   const container = document.getElementById('calendly-container');
   container.replaceChildren(widget);
+
+  // Waiver gate — must live here because CSP blocks inline scripts
+  const cb = document.getElementById('waiver-checkbox');
+  const gate = document.getElementById('waiver-gate');
+  if (cb && gate) {
+    cb.addEventListener('change', function () {
+      gate.style.display = cb.checked ? 'none' : 'flex';
+    });
+  }
 })();

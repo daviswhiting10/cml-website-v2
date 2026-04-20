@@ -88,34 +88,23 @@
   </section>
 
   <!-- CALENDLY WIDGET -->
-  <section class="calendly-section" id="calendly-section">
+  <section class="calendly-section">
     <div class="container">
-      <div id="calendly-placeholder" style="display:flex;align-items:center;justify-content:center;min-height:180px;border:1px solid rgba(255,255,255,.1);border-radius:6px;background:rgba(255,255,255,.03);">
-        <p style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);">Agree to the waiver above to unlock scheduling</p>
+      <div style="position:relative;">
+        <div id="calendly-container"></div>
+        <div id="waiver-gate" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:50;background:rgba(10,10,10,.6);display:flex;align-items:center;justify-content:center;border-radius:6px;">
+          <p style="font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.7);text-align:center;padding:1rem;">Read and agree to the waiver above to continue</p>
+        </div>
       </div>
-      <div id="calendly-container" style="display:none;"></div>
     </div>
   </section>
   <script src="assets/js/book-page.js"></script>
   <script>
     (function () {
       var cb = document.getElementById('waiver-checkbox');
-      var placeholder = document.getElementById('calendly-placeholder');
-      var container = document.getElementById('calendly-container');
-      var loaded = false;
+      var gate = document.getElementById('waiver-gate');
       cb.addEventListener('change', function () {
-        if (cb.checked) {
-          placeholder.style.display = 'none';
-          container.style.display = '';
-          if (!loaded) {
-            loaded = true;
-            window.initCalendly();
-          }
-          container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        } else {
-          placeholder.style.display = 'flex';
-          container.style.display = 'none';
-        }
+        gate.style.display = cb.checked ? 'none' : 'flex';
       });
     })();
   </script>

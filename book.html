@@ -81,7 +81,7 @@
         <p style="margin-top:1rem;"><strong>MINOR RELEASE</strong> — AND I, THE MINOR'S PARENT AND/OR LEGAL GUARDIAN, UNDERSTAND THE NATURE OF THE ACTIVITY AND THE MINOR'S EXPERIENCE AND CAPABILITIES AND BELIEVE THE MINOR TO BE QUALIFIED, IN GOOD HEALTH, AND IN PROPER PHYSICAL CONDITION TO PARTICIPATE IN SUCH ACTIVITY. I HEREBY RELEASE, DISCHARGE, COVENANT NOT TO SUE, AND AGREE TO INDEMNIFY AND SAVE AND HOLD HARMLESS EACH OF THE RELEASEE'S FROM ALL LIABILITY CLAIMS, DEMANDS, LOSSES, OR DAMAGES ON THE MINOR'S ACCOUNT CAUSED OR ALLEGED TO BE CAUSED IN WHOLE OR IN PART BY THE NEGLIGENCE OF THE "RELEASEES" OR OTHERWISE, INCLUDING NEGLIGENT RESCUE OPERATION AND FURTHER AGREE THAT IF, DESPITE THIS RELEASE, I, THE MINOR, OR ANYONE ON THE MINOR'S BEHALF MAKES A CLAIM AGAINST ANY OF THE RELEASEES NAMED ABOVE, I WILL INDEMNITY, SAVE, AND HOLD HARMLESS EACH OF THE RELEASEES FROM ANY LITIGATION EXPENSES, ATTORNEY FEES, LOSS LIABILITY, DAMAGE, OR COST ANY MAY INCUR AS THE RESULT OF ANY SUCH CLAIM.</p>
       </div>
       <label id="waiver-label" style="display:flex;align-items:flex-start;gap:.75rem;margin-top:1.25rem;cursor:pointer;font-size:.95rem;line-height:1.5;">
-        <input type="checkbox" id="waiver-checkbox" style="margin-top:.25rem;width:18px;height:18px;flex-shrink:0;accent-color:var(--accent,#e63946);">
+        <input type="checkbox" id="waiver-checkbox" onclick="document.getElementById('waiver-gate').style.display=this.checked?'none':'flex';" style="margin-top:.25rem;width:18px;height:18px;flex-shrink:0;accent-color:var(--accent,#e63946);">
         <span>I have read the waiver and agree to all its terms. Submit my form.</span>
       </label>
     </div>
@@ -99,15 +99,6 @@
     </div>
   </section>
   <script src="assets/js/book-page.js"></script>
-  <script>
-    (function () {
-      var cb = document.getElementById('waiver-checkbox');
-      var gate = document.getElementById('waiver-gate');
-      cb.addEventListener('change', function () {
-        gate.style.display = cb.checked ? 'none' : 'flex';
-      });
-    })();
-  </script>
 
   <!-- FOOTER -->
   <footer id="cml-footer">

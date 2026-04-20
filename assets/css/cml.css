@@ -2068,3 +2068,141 @@ ul { list-style: none; }
 .contact-page-header :focus-visible {
   outline-color: var(--black);
 }
+
+/* ============================================================
+   ASSESSMENT MODAL
+   ============================================================ */
+#cml-assessment-modal {
+  position: fixed; inset: 0; z-index: 9000;
+  background: #fff; overflow-y: auto;
+  display: flex; align-items: flex-start; justify-content: center;
+  padding: 2rem 1rem 4rem;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s;
+}
+#cml-assessment-modal.open { opacity: 1; pointer-events: all; }
+.assessment-inner {
+  width: 100%; max-width: 640px;
+  padding-top: 3rem;
+}
+.assessment-close {
+  position: fixed; top: 1.5rem; right: 1.5rem;
+  background: none; border: 1px solid var(--border);
+  font-family: var(--fh); font-size: 1.2rem; font-weight: 700;
+  cursor: pointer; padding: 0.4rem 0.8rem; line-height: 1;
+  color: var(--white); z-index: 9001;
+}
+.assessment-screen { display: none; }
+.assessment-screen.active { display: block; }
+.assessment-q-label {
+  font-family: var(--fh); font-size: 0.7rem; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem;
+}
+.assessment-headline {
+  font-family: var(--fh); font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800; text-transform: uppercase; line-height: 1.0;
+  margin-bottom: 1rem; color: var(--white);
+}
+.assessment-subhead {
+  font-size: 1rem; color: var(--muted); line-height: 1.7; margin-bottom: 2rem;
+}
+.assessment-question {
+  font-family: var(--fh); font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-weight: 700; text-transform: uppercase; margin-bottom: 2rem;
+  line-height: 1.1; color: var(--white);
+}
+.assessment-options { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+.assessment-option {
+  display: flex; align-items: center; gap: 1rem;
+  border: 1px solid var(--border); padding: 1rem 1.25rem;
+  cursor: pointer; transition: border-color 0.15s, background 0.15s;
+  font-size: 0.95rem; color: var(--white);
+}
+.assessment-option:hover { border-color: var(--white); background: var(--g1); }
+.assessment-option.selected { border-color: var(--white); background: var(--white); color: var(--black); }
+.assessment-option input[type="radio"] { display: none; }
+.assessment-select {
+  width: 100%; border: 1px solid var(--border); padding: 0.9rem 1rem;
+  font-family: var(--fb); font-size: 0.95rem; background: #fff;
+  color: var(--white); appearance: none; margin-bottom: 1rem;
+}
+.assessment-textarea {
+  width: 100%; border: 1px solid var(--border); padding: 0.9rem 1rem;
+  font-family: var(--fb); font-size: 0.95rem; resize: vertical;
+  min-height: 100px; color: var(--white);
+}
+.assessment-btn-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+/* Results */
+.assessment-score-big {
+  font-family: var(--fh); font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 800; line-height: 1; color: var(--white);
+}
+.assessment-score-label {
+  font-family: var(--fh); font-size: 1rem; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 2rem;
+}
+.pillar-bar-wrap { margin-bottom: 1.25rem; }
+.pillar-bar-label {
+  font-family: var(--fh); font-size: 0.75rem; letter-spacing: 0.15em;
+  text-transform: uppercase; margin-bottom: 0.4rem;
+  display: flex; justify-content: space-between;
+}
+.pillar-bar-track {
+  height: 6px; background: var(--g2); position: relative; overflow: hidden;
+}
+.pillar-bar-fill {
+  position: absolute; left: 0; top: 0; height: 100%;
+  background: var(--white); width: 0;
+  transition: width 0.9s cubic-bezier(0.25,1,0.5,1);
+}
+.assessment-gap {
+  border-left: 2px solid var(--white); padding: 1rem 1.5rem;
+  margin: 2rem 0; font-size: 0.95rem; line-height: 1.7; color: var(--muted);
+}
+.assessment-match {
+  font-family: var(--fh); font-size: 1.1rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  border: 1px solid var(--border); padding: 1.25rem 1.5rem; margin: 2rem 0;
+}
+/* Clinic date cards */
+.clinic-dates-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem; margin-top: 2rem;
+}
+.clinic-date-card {
+  border: 1px solid var(--border); padding: 2rem;
+}
+.clinic-date-big {
+  font-family: var(--fh); font-size: 2.5rem; font-weight: 800;
+  text-transform: uppercase; line-height: 1; margin-bottom: 0.5rem;
+}
+.clinic-date-location {
+  font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 1rem;
+}
+.clinic-date-sessions { font-size: 0.9rem; line-height: 1.8; margin-bottom: 1.5rem; }
+/* FAQ */
+.faq-section details {
+  border-bottom: 1px solid var(--border); padding: 1.5rem 0;
+}
+.faq-section summary {
+  font-family: var(--fh); font-size: 1.1rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.04em;
+  cursor: pointer; list-style: none; display: flex;
+  justify-content: space-between; align-items: center;
+  color: var(--white);
+}
+.faq-section summary::-webkit-details-marker { display: none; }
+.faq-section summary::after {
+  content: '+'; font-family: var(--fh); font-size: 1.4rem; font-weight: 400;
+  color: var(--muted); transition: transform 0.2s;
+}
+.faq-section details[open] summary::after { content: '\2212'; }
+.faq-section details p {
+  margin-top: 1rem; font-size: 0.95rem; line-height: 1.75;
+  color: var(--muted); max-width: 660px;
+}
+@media (max-width: 600px) {
+  .assessment-inner { padding-top: 4rem; }
+  .assessment-close { top: 1rem; right: 1rem; }
+}

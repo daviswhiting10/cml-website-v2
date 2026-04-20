@@ -67,7 +67,7 @@
     <div class="container">
       <p class="page-header-label">Sessions</p>
       <h1>Book Your Spot</h1>
-      <p class="page-header-sub">Select a session below and reserve your place. Payment of $60 via Zelle to <strong style="color:var(--white);font-weight:600;">drivenedgellc@gmail.com</strong> confirms your registration. Reschedules welcome with advance notice. Zelle payments are final, but we'll work with you when life happens. By booking, you agree to our <a href="waiver.html" style="color:var(--white);text-decoration:underline;">Liability Waiver</a> and <a href="privacy.html" style="color:var(--white);text-decoration:underline;">Privacy Policy</a>.</p>
+      <p class="page-header-sub">Select a session below and reserve your place. Payment of $60 via Zelle to <strong style="color:var(--white);font-weight:600;">drivenedgellc@gmail.com</strong> confirms your registration. By booking, you agree to our <a href="waiver.html" style="color:var(--white);text-decoration:underline;">Liability Waiver</a> and <a href="privacy.html" style="color:var(--white);text-decoration:underline;">Privacy Policy</a>.</p>
     </div>
   </div>
 
@@ -88,23 +88,21 @@
   </section>
 
   <!-- CALENDLY WIDGET -->
-  <section class="calendly-section" id="calendly-section" style="display:none;">
-    <div class="container">
+  <section class="calendly-section" id="calendly-section">
+    <div class="container" style="position:relative;">
       <div id="calendly-container"></div>
+      <div id="calendly-block" style="position:absolute;inset:0;cursor:not-allowed;z-index:10;background:rgba(0,0,0,.45);border-radius:6px;display:flex;align-items:center;justify-content:center;">
+        <p style="color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-align:center;padding:1rem;">Agree to the waiver above to continue</p>
+      </div>
     </div>
   </section>
   <script src="assets/js/book-page.js"></script>
   <script>
     (function () {
       var cb = document.getElementById('waiver-checkbox');
-      var section = document.getElementById('calendly-section');
+      var block = document.getElementById('calendly-block');
       cb.addEventListener('change', function () {
-        if (cb.checked) {
-          section.style.display = '';
-          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        } else {
-          section.style.display = 'none';
-        }
+        block.style.display = cb.checked ? 'none' : 'flex';
       });
     })();
   </script>

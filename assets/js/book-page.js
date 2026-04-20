@@ -4,7 +4,8 @@
   // Strict allow-list: YYYY-MM-DD only. Any other input is dropped.
   const dateOk = rawDate && /^\d{4}-\d{2}-\d{2}$/.test(rawDate);
   const baseURL = 'https://calendly.com/centralmdlax-info/new-meeting';
-  const calendlyURL = dateOk ? baseURL + '?date=' + rawDate : baseURL;
+  const month = dateOk ? rawDate.slice(0, 7) : null; // YYYY-MM
+  const calendlyURL = dateOk ? baseURL + '?date=' + rawDate + '&month=' + month : baseURL;
 
   const widget = document.createElement('div');
   widget.className = 'calendly-inline-widget';

@@ -3,7 +3,7 @@
   const rawDate = params.get('date');
   // Strict allow-list: YYYY-MM-DD only. Any other input is dropped.
   const dateOk = rawDate && /^\d{4}-\d{2}-\d{2}$/.test(rawDate);
-  const baseURL = 'https://calendly.com/centralmdlax-info/new-meeting';
+  const baseURL = 'https://calendly.com/centralmdlax-info/cml-training-session-1';
   const month = dateOk ? rawDate.slice(0, 7) : null; // YYYY-MM
   const calendlyURL = dateOk ? baseURL + '?date=' + rawDate + '&month=' + month : baseURL;
 

@@ -54,9 +54,9 @@
     var session, group;
 
     if (yr >= 2033 && yr <= 2036) {
-      session = '9:30 AM Session (Grad Years 2036\u20132033)';
+      session = '10:00 AM Session (Grad Years 2036\u20132033)';
     } else {
-      session = '10:45 AM Session (Grad Years 2032\u20132026)';
+      session = '11:00 AM Session (Grad Years 2032\u20132026)';
     }
 
     if (pos === 'Attack' || pos === 'Midfield') {

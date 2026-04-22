@@ -1,7 +1,7 @@
 // Shared session dates — single source of truth for train.html and clinic.html
 window.CML_SESSIONS = [
-  { year: 2026, month: 4, date: 23, name: '2036\u20132026 Skill Development Clinic', time: '9:30 AM \u2013 12:00 PM', location: 'Western Regional Park', details: ['9:30 \u2013 10:45 AM: Grad Years 2036\u20132033', '10:45 AM \u2013 12:00 PM: Grad Years 2032\u20132026'] },
-  { year: 2026, month: 5, date:  6, name: '2036\u20132026 Skill Development Clinic', time: '9:30 AM \u2013 12:00 PM', location: 'Western Regional Park', details: ['9:30 \u2013 10:45 AM: Grad Years 2036\u20132033', '10:45 AM \u2013 12:00 PM: Grad Years 2032\u20132026'] },
+  { year: 2026, month: 4, date: 23, name: '2036\u20132026 Skill Development Clinic', time: '10:00 AM \u2013 12:00 PM', location: 'Long Reach High School, 6101 Old Dobbin Ln, Columbia, MD 21045', details: ['10:00 \u2013 11:00 AM: Grad Years 2036\u20132033', '11:00 AM \u2013 12:00 PM: Grad Years 2032\u20132026'] },
+  { year: 2026, month: 5, date:  6, name: '2036\u20132026 Skill Development Clinic', time: '10:00 AM \u2013 12:00 PM', location: 'Long Reach High School, 6101 Old Dobbin Ln, Columbia, MD 21045', details: ['10:00 \u2013 11:00 AM: Grad Years 2036\u20132033', '11:00 AM \u2013 12:00 PM: Grad Years 2032\u20132026'] },
 ];
 
 // Render clinic date cards into a container element
@@ -35,8 +35,8 @@ window.CML_SESSIONS = [
         + '<div class="clinic-date-big">' + escHtml(dow + ', ' + mon + ' ' + s.date) + '</div>'
         + '<div class="clinic-date-location">' + escHtml(s.location) + '</div>'
         + '<div class="clinic-date-sessions">'
-        + '<div>Session 1: 9:30 \u2013 10:45 AM \u2014 Grad Years 2036\u20132033</div>'
-        + '<div>Session 2: 10:45 AM \u2013 12:00 PM \u2014 Grad Years 2032\u20132026</div>'
+        + '<div>Session 1: 10:00 \u2013 11:00 AM \u2014 Grad Years 2036\u20132033</div>'
+        + '<div>Session 2: 11:00 AM \u2013 12:00 PM \u2014 Grad Years 2032\u20132026</div>'
         + '</div>'
         + '<a href="book.html?date=' + escHtml(dateStr) + '" class="btn btn-outline">Register &rarr;</a>'
         + '</div>';

@@ -6,8 +6,9 @@
   <script src="assets/js/ga.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://assets.calendly.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://calendly.com https://*.calendly.com https://www.youtube.com; connect-src 'self' https://calendly.com https://*.calendly.com https://www.google-analytics.com https://*.google-analytics.com; base-uri 'self'; form-action 'self'; object-src 'none'">
-  <title>Book a Session — Central Maryland Lax</title>
+  <!-- CSP: removed Calendly, added script.google.com for Apps Script -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://www.youtube.com; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://www.google-analytics.com https://*.google-analytics.com; base-uri 'self'; form-action 'self'; object-src 'none'">
+  <title>Register — Central Maryland Lax</title>
   <link rel="icon" type="image/png" href="images/cml-favicon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
@@ -16,26 +17,335 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/cml.css">
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 
   <!-- SEO -->
-  <meta name="description" content="Reserve your CML lacrosse session. Calendly-based booking, Zelle payment, Columbia-area sessions.">
+  <meta name="description" content="Register for a CML position-specific lacrosse clinic in Columbia, MD. 60 minutes, D1 coaching, Long Reach High School.">
   <link rel="canonical" href="https://centralmdlax.com/book.html">
-  <meta name="robots" content="index,follow">
+  <meta name="robots" content="noindex, nofollow">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Central Maryland Lax">
-  <meta property="og:title" content="Book a Session — Central Maryland Lax">
-  <meta property="og:description" content="Reserve your CML lacrosse session. Calendly-based booking, Zelle payment, Columbia-area sessions.">
+  <meta property="og:title" content="Register — Central Maryland Lax">
+  <meta property="og:description" content="Register for a CML position-specific lacrosse clinic in Columbia, MD.">
   <meta property="og:image" content="https://centralmdlax.com/images/og-default.jpg">
   <meta property="og:url" content="https://centralmdlax.com/book.html">
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Book a Session — Central Maryland Lax">
-  <meta name="twitter:description" content="Reserve your CML lacrosse session. Calendly-based booking, Zelle payment, Columbia-area sessions.">
-  <meta name="twitter:image" content="https://centralmdlax.com/images/og-default.jpg">
+  <style>
+    /* ── Registration form ─────────────────────────────────────── */
+    .reg-wrap {
+      padding: 5rem 0 7rem;
+    }
+
+    /* Section label */
+    .reg-section-label {
+      font-family: var(--fh);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    /* Fieldset groups */
+    .reg-fieldset {
+      border: none;
+      padding: 0;
+      margin: 0 0 2.75rem;
+    }
+    .reg-fieldset-title {
+      font-family: var(--fh);
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Two-column row on desktop */
+    .reg-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 640px) {
+      .reg-row { grid-template-columns: 1fr; }
+    }
+
+    /* Field wrapper */
+    .reg-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-bottom: 1rem;
+    }
+    .reg-field:last-child { margin-bottom: 0; }
+
+    .reg-label {
+      font-family: var(--fh);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .reg-label-opt {
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      margin-left: 0.4em;
+    }
+
+    .reg-input,
+    .reg-select,
+    .reg-textarea {
+      font-family: var(--fb);
+      font-size: 0.95rem;
+      color: var(--white);
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.18);
+      padding: 0.875rem 1rem;
+      width: 100%;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      border-radius: 2px;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .reg-input:focus,
+    .reg-select:focus,
+    .reg-textarea:focus {
+      outline: none;
+      border-color: var(--navy);
+      box-shadow: 0 0 0 2px rgba(13,31,60,0.12);
+    }
+    .reg-input::placeholder,
+    .reg-textarea::placeholder {
+      color: rgba(0,0,0,0.3);
+    }
+    .reg-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230a0a0a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+    .reg-textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    /* ── Session / cohort radio cards ──────────────────────────── */
+    .reg-card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    @media (max-width: 480px) {
+      .reg-card-grid { grid-template-columns: 1fr; }
+    }
+
+    .reg-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      padding: 1.1rem 1.25rem;
+      border: 1px solid rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: border-color 0.18s, background 0.18s;
+      position: relative;
+      border-radius: 2px;
+      user-select: none;
+    }
+    .reg-card input[type="radio"],
+    .reg-card input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .reg-card:hover {
+      border-color: rgba(0,0,0,0.35);
+    }
+    .reg-card.selected {
+      border-color: var(--white);
+      background: var(--white);
+      color: var(--black);
+    }
+    .rc-main {
+      font-family: var(--fh);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+    .rc-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: var(--fb);
+    }
+    .reg-card.selected .rc-sub { color: rgba(0,0,0,0.5); }
+    .rc-badge {
+      display: inline-block;
+      margin-top: 0.4rem;
+      font-family: var(--fh);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: #0d1f3c;
+      color: #fff;
+      padding: 0.2em 0.65em;
+      border-radius: 1px;
+      width: fit-content;
+    }
+    .reg-card.selected .rc-badge {
+      background: #0d1f3c;
+      color: #fff;
+    }
+
+    /* ── Position checkboxes ───────────────────────────────────── */
+    .reg-pos-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+    @media (max-width: 480px) {
+      .reg-pos-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .reg-pos-card {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.85rem 1rem;
+      border: 1px solid rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: border-color 0.18s, background 0.18s;
+      border-radius: 2px;
+      font-family: var(--fh);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      user-select: none;
+    }
+    .reg-pos-card:hover { border-color: rgba(0,0,0,0.35); }
+    .reg-pos-card input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      accent-color: var(--navy);
+      cursor: pointer;
+    }
+    .reg-pos-card.checked {
+      border-color: var(--white);
+      background: var(--white);
+    }
+
+    /* ── Waiver ────────────────────────────────────────────────── */
+    .reg-waiver {
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 2px;
+      padding: 1.25rem 1.5rem;
+      background: var(--g1);
+      margin-bottom: 2rem;
+    }
+    .reg-waiver-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--white);
+    }
+    .reg-waiver-label input[type="checkbox"] {
+      margin-top: 0.2rem;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      accent-color: var(--navy);
+      cursor: pointer;
+    }
+    .reg-waiver-label a {
+      color: var(--navy);
+      text-decoration: underline;
+    }
+
+    /* ── Submit button ─────────────────────────────────────────── */
+    #reg-submit-btn {
+      width: 100%;
+      font-size: 0.9rem;
+      padding: 1.15rem 2rem;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+    }
+    #reg-submit-btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* ── Error state ───────────────────────────────────────────── */
+    #reg-error {
+      padding: 1rem 1.25rem;
+      border: 1px solid #c0392b;
+      background: #fff5f5;
+      color: #c0392b;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+    #reg-error a { color: #c0392b; text-decoration: underline; }
+
+    /* ── Success state ─────────────────────────────────────────── */
+    #reg-success {
+      text-align: center;
+      padding: 5rem 2rem 7rem;
+    }
+    .reg-success-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      line-height: 1;
+    }
+    .reg-success-headline {
+      font-family: var(--fh);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+    .reg-success-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+      line-height: 1.7;
+    }
+    #reg-success-detail {
+      font-family: var(--fh);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── Helper note ───────────────────────────────────────────── */
+    .reg-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+      line-height: 1.5;
+    }
+  </style>
 </head>
 <body>
 
@@ -47,6 +357,7 @@
     <ul class="nav-menu" id="nav-menu">
       <li><a href="index.html">Home</a></li>
       <li><a href="train.html">Training</a></li>
+      <li><a href="clinic.html" class="active">Clinics</a></li>
       <li class="nav-dropdown">
         <button class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="menu" aria-controls="nav-dropdown-panel-instructors">
           Instructors
@@ -68,40 +379,174 @@
   <!-- PAGE HEADER -->
   <div class="page-header">
     <div class="container">
-      <p class="page-header-label">Sessions</p>
-      <h1>Book Your Spot</h1>
-      <p class="page-header-sub">Select a session below and reserve your place. Payment of $80 via Zelle to <strong style="color:var(--white);font-weight:600;">drivenedgellc@gmail.com</strong> confirms your registration. By booking, you agree to our <a href="waiver.html" style="color:var(--white);text-decoration:underline;">Liability Waiver</a> and <a href="privacy.html" style="color:var(--white);text-decoration:underline;">Privacy Policy</a>.</p>
+      <p class="page-header-label">Clinic Registration &mdash; Long Reach High School</p>
+      <h1>Register Your<br>Athlete.</h1>
+      <p class="page-header-sub">Position-specific training. 60 minutes. D1 coaching. Columbia, MD.</p>
     </div>
   </div>
 
-  <!-- WAIVER ACKNOWLEDGMENT -->
-  <section style="padding:2.5rem 0 0;">
-    <div class="container" style="max-width:780px;">
-      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:1.6rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:1rem;">Waiver &amp; Release</h2>
-      <p style="font-size:.8rem;color:var(--muted,#888);margin-bottom:.75rem;">Prior to booking.</p>
-      <div id="waiver-text" style="max-height:260px;overflow-y:auto;border:1px solid rgba(255,255,255,.15);border-radius:6px;padding:1.25rem 1.5rem;font-size:.875rem;line-height:1.7;color:var(--text,#ccc);background:rgba(255,255,255,.04);">
-        <p>IN CONSIDERATION of being permitted to participate in any way in the Central Maryland Lax ("Activity") I, for myself for personal representatives, assigns, heirs, and next of kin: (i) ACKNOWLEDGE, agree, and represent that I understand the nature of the Activity and that I am qualified, in good health, and in proper physical condition to participate in such Activity. I further agree and warrant that if at any time I believe conditions to be unsafe, I will immediately discontinue further participation in the Activity. (ii) Fully Understand That: (a) THE ACTIVITY INVOLVES RISKS AND DANGERS OF SERIOUS BODILY INJURY, INCLUDING PERMANENT DISABILITY, PARALYSIS, AND DEATH ("RISKS AND DANGERS"); (b) these Risks and Dangers may be caused by my own or my minor's actions or inactions, the actions or inactions of others participating in the Activity, the condition in which the Activity takes place, or THE NEGLIGENCE OF THE "RELEASEES" NAMED BELOW; (c) there may be OTHER RISKS AND SOCIAL AND ECONOMIC LOSSES either not known to me or not readily foreseeable at this time; and I FULLY ACCEPT AND ASSUME ALL SUCH RISKS AND ALL RESPONSIBILITY FOR LOSSES, COSTS, AND DAMAGES I incur as a result of my participation or that of the minor in the Activity. (iii) HEREBY RELEASE, DISCHARGE, AND COVENANT NOT TO SUE Central Maryland Lax, its respective administrators, coaches, directors, agents, officers, members, volunteers, and employees, other participants, any sponsors, advertisers, and, if applicable, owner and lessors of premises on which the Activity takes place, (each considered one of the "RELEASEES" herein) FROM ALL LIABILITY, CLAIMS, DEMANDS, LOSSES, OR DAMAGES ON MY ACCOUNT CAUSED OR ALLEGED TO BE CAUSED IN WHOLE OR IN PART BY THE NEGLIGENCE OF THE "RELEASEES" OR OTHERWISE, INCLUDING NEGLIGENT RESCUE OPERATIONS AND I FURTHER AGREE that if, despite this RELEASE AND WAIVER OF LIABILITY, ASSUMPTION OF RISK, AND INDEMNITY AGREEMENT I, or anyone on my behalf, makes a claim against any of the Releasees, I WILL INDEMNIFY, SAVE, AND HOLD HARMLESS EACH OF THE RELEASEES from any litigation expenses, attorney fees, loss, liability, damage, or cost which may incur as the result of such claim. I HAVE READ THIS AGREEMENT, FULLY UNDERSTAND ITS TERMS, UNDERSTAND THAT I HAVE GIVEN UP SUBSTANTIAL RIGHTS BY SIGNING IT AND HAVE SIGNED IT FREELY AND WITHOUT INDUCEMENT OR ASSURANCE OF ANY NATURE AND INTEND IT TO BE A COMPLETE AND UNCONDITIONAL RELEASE OF ALL LIABILITY TO THE GREATEST EXTENT ALLOWED BY LAW AND AGREE THAT IF ANY PORTION OF THIS AGREEMENT IS HELD TO BE INVALID THE BALANCE, NOTWITHSTANDING, SHALL CONTINUE IN FULL FORCE AND EFFECT.</p>
-        <p style="margin-top:1rem;"><strong>MINOR RELEASE</strong> — AND I, THE MINOR'S PARENT AND/OR LEGAL GUARDIAN, UNDERSTAND THE NATURE OF THE ACTIVITY AND THE MINOR'S EXPERIENCE AND CAPABILITIES AND BELIEVE THE MINOR TO BE QUALIFIED, IN GOOD HEALTH, AND IN PROPER PHYSICAL CONDITION TO PARTICIPATE IN SUCH ACTIVITY. I HEREBY RELEASE, DISCHARGE, COVENANT NOT TO SUE, AND AGREE TO INDEMNIFY AND SAVE AND HOLD HARMLESS EACH OF THE RELEASEE'S FROM ALL LIABILITY CLAIMS, DEMANDS, LOSSES, OR DAMAGES ON THE MINOR'S ACCOUNT CAUSED OR ALLEGED TO BE CAUSED IN WHOLE OR IN PART BY THE NEGLIGENCE OF THE "RELEASEES" OR OTHERWISE, INCLUDING NEGLIGENT RESCUE OPERATION AND FURTHER AGREE THAT IF, DESPITE THIS RELEASE, I, THE MINOR, OR ANYONE ON THE MINOR'S BEHALF MAKES A CLAIM AGAINST ANY OF THE RELEASEES NAMED ABOVE, I WILL INDEMNITY, SAVE, AND HOLD HARMLESS EACH OF THE RELEASEES FROM ANY LITIGATION EXPENSES, ATTORNEY FEES, LOSS LIABILITY, DAMAGE, OR COST ANY MAY INCUR AS THE RESULT OF ANY SUCH CLAIM.</p>
-      </div>
-      <label id="waiver-label" style="display:flex;align-items:flex-start;gap:.75rem;margin-top:1.25rem;cursor:pointer;font-size:.95rem;line-height:1.5;">
-        <input type="checkbox" id="waiver-checkbox" style="margin-top:.25rem;width:18px;height:18px;flex-shrink:0;accent-color:var(--accent,#e63946);">
-        <span>I have read the waiver and agree to all its terms. Submit my form.</span>
-      </label>
-    </div>
-  </section>
+  <!-- FORM / SUCCESS -->
+  <div class="reg-wrap">
+    <div class="container-sm">
 
-  <!-- CALENDLY WIDGET -->
-  <section class="calendly-section">
-    <div class="container">
-      <div style="position:relative;min-height:700px;">
-        <div id="calendly-container"></div>
-        <div id="waiver-gate" style="position:absolute;top:0;left:0;width:100%;min-height:700px;z-index:50;background:rgba(10,10,10,.65);display:flex;align-items:center;justify-content:center;border-radius:6px;">
-          <p style="font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.85);text-align:center;padding:1rem;">Read and agree to the waiver above to continue</p>
-        </div>
+      <!-- ── Success state (hidden until submission) ───────────── -->
+      <div id="reg-success" hidden>
+        <div class="reg-success-icon">&#10003;</div>
+        <h2 class="reg-success-headline">You&rsquo;re Registered.</h2>
+        <p class="reg-success-sub">Check your email for a confirmation with location details and what to bring.</p>
+        <p id="reg-success-detail"></p>
+        <a href="clinic.html" class="btn btn-outline">Back to Clinics</a>
       </div>
-    </div>
-  </section>
-  <script src="assets/js/book-page.js"></script>
+
+      <!-- ── Error banner (hidden until error) ─────────────────── -->
+      <div id="reg-error" hidden></div>
+
+      <!-- ── Registration form ──────────────────────────────────── -->
+      <form id="cml-reg-form" novalidate>
+
+        <!-- SECTION 1: Clinic Date -->
+        <fieldset class="reg-fieldset">
+          <span class="reg-section-label">Step 1 of 4</span>
+          <div class="reg-fieldset-title">Select a Clinic Date</div>
+          <div id="reg-date-grid" class="reg-card-grid">
+            <!-- Populated by book-page.js -->
+          </div>
+        </fieldset>
+
+        <!-- SECTION 2: Session Time -->
+        <fieldset class="reg-fieldset">
+          <span class="reg-section-label">Step 2 of 4</span>
+          <div class="reg-fieldset-title">Select a Session Time</div>
+          <div id="reg-cohort-grid" class="reg-card-grid">
+            <!-- Populated by book-page.js -->
+          </div>
+          <p class="reg-note" style="margin-top:0.75rem;">Offense (Attack &amp; Midfield) works with Davis &mdash; Defense &amp; LSM works with Jack. Both sessions, same format.</p>
+        </fieldset>
+
+        <!-- SECTION 3: Athlete & Parent Info -->
+        <fieldset class="reg-fieldset">
+          <span class="reg-section-label">Step 3 of 4</span>
+          <div class="reg-fieldset-title">Athlete &amp; Parent Info</div>
+
+          <div class="reg-row">
+            <div class="reg-field">
+              <label class="reg-label" for="athleteName">Athlete Name <span aria-hidden="true">*</span></label>
+              <input class="reg-input" type="text" id="athleteName" name="athleteName"
+                     autocomplete="name" required placeholder="First Last">
+            </div>
+            <div class="reg-field">
+              <label class="reg-label" for="gradYear">Class of (Grad Year) <span aria-hidden="true">*</span></label>
+              <select class="reg-select" id="gradYear" name="gradYear" required>
+                <option value="">Select year</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+                <option value="2031">2031</option>
+                <option value="2032">2032</option>
+                <option value="2033">2033</option>
+                <option value="2034">2034</option>
+                <option value="2035">2035</option>
+                <option value="2036">2036</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Positions -->
+          <div class="reg-field" style="margin-top:0.5rem;">
+            <span class="reg-label" id="pos-legend">Position(s) <span aria-hidden="true">*</span></span>
+            <div class="reg-pos-grid" role="group" aria-labelledby="pos-legend">
+              <label class="reg-pos-card">
+                <input type="checkbox" name="position" value="Attack">
+                Attack
+              </label>
+              <label class="reg-pos-card">
+                <input type="checkbox" name="position" value="Midfield">
+                Midfield
+              </label>
+              <label class="reg-pos-card">
+                <input type="checkbox" name="position" value="LSM">
+                LSM
+              </label>
+              <label class="reg-pos-card">
+                <input type="checkbox" name="position" value="Close Defense">
+                Close Defense
+              </label>
+            </div>
+            <p class="reg-note">Select all that apply. Goalies &amp; FOGOs: email us first at info@centralmdlax.com.</p>
+          </div>
+
+          <!-- Parent info -->
+          <div class="reg-row" style="margin-top:1.25rem;">
+            <div class="reg-field">
+              <label class="reg-label" for="parentName">Parent / Guardian Name <span aria-hidden="true">*</span></label>
+              <input class="reg-input" type="text" id="parentName" name="parentName"
+                     autocomplete="name" required placeholder="First Last">
+            </div>
+            <div class="reg-field">
+              <label class="reg-label" for="parentEmail">Parent Email <span aria-hidden="true">*</span></label>
+              <input class="reg-input" type="email" id="parentEmail" name="parentEmail"
+                     autocomplete="email" required placeholder="you@email.com">
+            </div>
+          </div>
+          <div class="reg-field">
+            <label class="reg-label" for="parentPhone">Parent Phone <span aria-hidden="true">*</span></label>
+            <input class="reg-input" type="tel" id="parentPhone" name="parentPhone"
+                   autocomplete="tel" required placeholder="(555) 000-0000" style="max-width:280px;">
+          </div>
+        </fieldset>
+
+        <!-- SECTION 4: Emergency Contact & Medical -->
+        <fieldset class="reg-fieldset">
+          <span class="reg-section-label">Step 4 of 4</span>
+          <div class="reg-fieldset-title">Emergency Contact &amp; Medical</div>
+
+          <div class="reg-row">
+            <div class="reg-field">
+              <label class="reg-label" for="emergencyName">Emergency Contact Name <span aria-hidden="true">*</span></label>
+              <input class="reg-input" type="text" id="emergencyName" name="emergencyName"
+                     required placeholder="First Last">
+            </div>
+            <div class="reg-field">
+              <label class="reg-label" for="emergencyPhone">Emergency Contact Phone <span aria-hidden="true">*</span></label>
+              <input class="reg-input" type="tel" id="emergencyPhone" name="emergencyPhone"
+                     required placeholder="(555) 000-0000">
+            </div>
+          </div>
+
+          <div class="reg-field">
+            <label class="reg-label" for="medicalNotes">
+              Medical / Allergy Notes
+              <span class="reg-label-opt">(optional)</span>
+            </label>
+            <textarea class="reg-textarea" id="medicalNotes" name="medicalNotes"
+                      placeholder="List any medical conditions, allergies, or medications the coaching staff should know about. Leave blank if none."></textarea>
+          </div>
+        </fieldset>
+
+        <!-- WAIVER -->
+        <div class="reg-waiver">
+          <label class="reg-waiver-label">
+            <input type="checkbox" id="waiver-check">
+            <span>I have read and agree to the
+              <a href="waiver.html" target="_blank" rel="noopener">CML Liability Waiver</a>
+              on behalf of the registered athlete. I understand that participation involves physical risk and I accept responsibility for those risks.</span>
+          </label>
+        </div>
+
+        <!-- SUBMIT -->
+        <button type="submit" id="reg-submit-btn" class="btn btn-white">
+          Register Now &rarr;
+        </button>
+
+        <p class="reg-note" style="margin-top:1rem;text-align:center;">
+          Questions? Email <a href="mailto:info@centralmdlax.com" style="color:var(--navy);text-decoration:underline;">info@centralmdlax.com</a>
+        </p>
+
+      </form><!-- #cml-reg-form -->
+    </div><!-- .container-sm -->
+  </div><!-- .reg-wrap -->
 
   <!-- FOOTER -->
   <footer id="cml-footer">
@@ -112,6 +557,7 @@
           <ul class="footer-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="train.html">Training</a></li>
+            <li><a href="clinic.html">Clinics</a></li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="privacy.html">Privacy</a></li>
             <li><a href="waiver.html">Waiver</a></li>
@@ -138,7 +584,6 @@
   </footer>
 
   <script src="assets/js/cml.js"></script>
-  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-
+  <script src="assets/js/book-page.js"></script>
 </body>
 </html>

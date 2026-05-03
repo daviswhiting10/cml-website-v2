@@ -6,7 +6,7 @@
  * Execute as: Me | Who has access: Anyone
  */
 (function () {
-  var SCRIPT_URL = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE';
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwEuEU55QMaYb50egJ5tJhqLhnZFdXuo6NNcdCB1EsMvP5mT_BWTxWz2_-ryetZ1t-N/exec';
 
   /* ── Session definitions (mirrors clinic-dates.js) ────────────── */
   var DATES = [
@@ -134,10 +134,9 @@
     submitBtn.textContent = 'Submitting\u2026';
 
     fetch(SCRIPT_URL, {
-      method:   'POST',
-      headers:  { 'Content-Type': 'text/plain' },
-      body:     JSON.stringify(payload),
-      redirect: 'follow'
+      method:  'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body:    JSON.stringify(payload)
     })
     .then(function (res) { return res.json(); })
     .then(function (data) {

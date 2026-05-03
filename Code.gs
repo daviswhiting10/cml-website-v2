@@ -139,7 +139,7 @@ function sendConfirmation(data) {
     'centralmdlax.com'
   ].join('\n');
 
-  MailApp.sendEmail(data.parentEmail, subject, body, {
+  GmailApp.sendEmail(data.parentEmail, subject, body, {
     name:    'Central Maryland Lax',
     replyTo: ADMIN_EMAIL
   });

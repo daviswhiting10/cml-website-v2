@@ -52,7 +52,7 @@ function doPost(e) {
       sheet = ss.insertSheet(SHEET_NAME);
       sheet.appendRow([
         'Timestamp', 'Session Date', 'Session Time / Cohort',
-        'Athlete Name', 'Grade (Class of)', 'Position(s)',
+        'Athlete Name', 'Club Team', 'Grade (Class of)', 'Position(s)',
         'Parent Name', 'Parent Email', 'Parent Phone',
         'Emergency Contact Name', 'Emergency Contact Phone',
         'Medical/Allergy Notes', 'Waiver Agreed', 'Source'
@@ -70,6 +70,7 @@ function doPost(e) {
       data.sessionDate,
       data.sessionCohort,
       data.athleteName,
+      data.clubTeam || '',
       data.gradYear,
       positions,
       data.parentName,
@@ -83,8 +84,17 @@ function doPost(e) {
     ]);
 
     /* Emails — non-fatal: log errors, don't fail the registration */
-    try { sendConfirmation(data); }    catch(err) { Logger.log('Confirm email error: ' + err); }
-    try { sendAdminNotification(data); } catch(err) { Logger.log('Admin email error: ' + err); }
+    try {
+      sendConfirmation(data);
+      Logger.log('Confirmation email sent to: ' + data.parentEmail);
+    } catch(err) {
+      Logger.log('ERROR sending confirmation to ' + data.parentEmail + ': ' + err);
+    }
+    try {
+      sendAdminNotification(data);
+    } catch(err) {
+      Logger.log('ERROR sending admin notification: ' + err);
+    }
 
     return respond({ success: true });
 
@@ -145,6 +155,7 @@ function sendAdminNotification(data) {
     'New clinic registration received.',
     '',
     'ATHLETE:    ' + data.athleteName + '  (Class of ' + data.gradYear + ')',
+    'CLUB:       ' + (data.clubTeam || '—'),
     'POSITION:   ' + positions,
     'SESSION:    ' + data.sessionDate + '  |  ' + data.sessionCohort,
     '',

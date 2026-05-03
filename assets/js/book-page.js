@@ -100,6 +100,7 @@
     /* Text fields */
     var fields = {
       athleteName:   fieldVal(form, 'athleteName'),
+      clubTeam:      fieldVal(form, 'clubTeam'),
       gradYear:      fieldVal(form, 'gradYear'),
       parentName:    fieldVal(form, 'parentName'),
       parentEmail:   fieldVal(form, 'parentEmail'),
@@ -108,7 +109,7 @@
       emergencyPhone:fieldVal(form, 'emergencyPhone'),
       medicalNotes:  fieldVal(form, 'medicalNotes')
     };
-    var textRequired = ['athleteName','gradYear','parentName','parentEmail','parentPhone','emergencyName','emergencyPhone'];
+    var textRequired = ['athleteName','clubTeam','gradYear','parentName','parentEmail','parentPhone','emergencyName','emergencyPhone'];
     for (var i = 0; i < textRequired.length; i++) {
       if (!fields[textRequired[i]]) return showError('Please fill in all required fields.');
     }
@@ -117,6 +118,7 @@
       sessionDate:    dateObj.label,
       sessionCohort:  cohortObj.label + ' — ' + cohortObj.years,
       athleteName:    fields.athleteName,
+      clubTeam:       fields.clubTeam,
       gradYear:       fields.gradYear,
       positions:      positions,
       parentName:     fields.parentName,
